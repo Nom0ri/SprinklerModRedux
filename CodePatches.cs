@@ -21,8 +21,11 @@ namespace SprinklerMod
         [HarmonyPatch(typeof(Object), nameof(Object.performRemoveAction))]
         public class Object_performRemoveAction_Patch
         {
-            public static void Postfix(Object __instance, Vector2 tileLocation, GameLocation environment)
+            public static void Postfix(Object __instance)
             {
+                GameLocation environment = __instance.Location;
+                Vector2 tileLocation = __instance.TileLocation;
+
                 if (!Config.EnableMod || !__instance.IsSprinkler())
                     return;
                 DeactiveateSprinkler(tileLocation, environment);

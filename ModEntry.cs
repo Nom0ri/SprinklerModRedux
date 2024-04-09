@@ -67,7 +67,7 @@ namespace SprinklerMod
                 {
                     foreach (Vector2 v2 in key.GetSprinklerTiles())
                     {
-                        key.ApplySprinkler(activeSprinklers.Value[key].location, v2);
+                        key.ApplySprinkler(v2);
                     }
                     activeSprinklers.Value.Remove(key);
                 }

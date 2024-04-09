@@ -23,7 +23,9 @@ namespace SprinklerMod
         private void ActivateSprinkler(Object obj, GameLocation currentLocation)
         {
             DeactiveateSprinkler(obj.TileLocation, currentLocation);
-            obj.ApplySprinklerAnimation(Game1.currentLocation);
+            obj.ApplySprinklerAnimation();
+            GameLocation location = obj.Location;
+
             activeSprinklers.Value.Add(obj, new ActiveSprinklerData()
             {
                 location = Game1.currentLocation
@@ -32,7 +34,8 @@ namespace SprinklerMod
 
         private static void DeactiveateSprinkler(Vector2 tileLocation, GameLocation currentLocation)
         {
-            currentLocation.TemporarySprites.RemoveAll(s => s.id == tileLocation.X * 4000f + tileLocation.Y);
+            TemporaryAnimatedSprite spriteToRemove = currentLocation.TemporarySprites.FirstOrDefault(s => s.id == tileLocation.X * 4000f + tileLocation.Y);
+            currentLocation.TemporarySprites.Remove(spriteToRemove);
         }
     }
 }
